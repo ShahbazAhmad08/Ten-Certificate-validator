@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    certificateId: {
+    certificateNumber: {
       type: Number,
       required: true,
       unique: true,
@@ -19,6 +19,21 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
       trim: true,
+    },
+    phone: {
+      type: Number,
+    },
+    employeeID: {
+      type: String,
+    },
+    startDate: {
+      type: Date,
+    },
+    endDate: {
+      type: Date,
+    },
+    Domain: {
+      type: String,
     },
   },
   { timestamps: true }

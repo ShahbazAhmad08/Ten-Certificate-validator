@@ -2,9 +2,9 @@ import User from "../models/User.js";
 
 const getDetails=async (req, res) => {
   try {
-    const { certificateId } = req.body;
+    const { certificateNumber } = req.body;
 
-    const user = await User.findOne({ certificateId: certificateId });
+    const user = await User.findOne({ certificateNumber: certificateNumber });
 
     if (!user) {
       return res.status(404).json({
