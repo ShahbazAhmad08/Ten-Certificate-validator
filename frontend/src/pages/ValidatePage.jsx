@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Header from '../components/Header'
 import Success from '../components/Success'
 import Error from '../components/Error'
+import { validate } from '../services/validateCertificate'
+import CertificateCard from '../components/CertificateCard'
 
 const ValidatePage = () => {
   const [certificateNumber, setCertificateNumber] = useState('')
@@ -16,18 +18,19 @@ const ValidatePage = () => {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
+      await validate(certificateNumber)
       setSuccess({ value: 'Certificate Validate Successfull...' })
       setError(null)
     } catch (error) {
-      setError('Error Occured...')
+      setError(error.message)
       setSuccess(null)
     }
   }
 
   return (
-    <div className='w-screen h-screen bg-[#37353E] p-2'>
+    <div className='w-full min-h-screen bg-[#37353E] p-2'>
       <Header heading='Validate Certificate' />
       <main className='mt-5'>
         <div className='w-full flex justify-center md:flex-nowrap flex-wrap gap-2 sm:gap-5'>
@@ -45,8 +48,22 @@ const ValidatePage = () => {
             Validate
           </button>
         </div>
-        {success && <div className='mt-5'><Success value={success.value} /></div>}
-        {error && <div className='mt-5'><Error value={error} /></div>}
+        {success && (
+          <div className='overflow-hidden'>
+            <div className='mt-5'>
+              <Success value={success.value} />
+            </div>
+            <div className='my-3'>
+              <CertificateCard />
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className='mt-5'>
+            <Error value={error} />
+          </div>
+        )}
       </main>
     </div>
   )

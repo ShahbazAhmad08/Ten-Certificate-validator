@@ -109,6 +109,7 @@ const addUser = async (req, res) => {
   }
   try {
     let certificateNumber = generateCertificateNumber();
+    console.log({certificateNumber});
     let checkUser= await User.findOne({certificateNumber});
     console.log(certificateNumber);
     console.log(checkUser);
