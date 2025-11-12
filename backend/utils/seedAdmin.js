@@ -12,7 +12,7 @@ const seedDefaultAdmin = async () => {
         const adminExists = await Admin.findOne({ email: defaultEmail });
 
         if (adminExists) {
-            console.log('✅ Default admin already exists. Skipping creation.');
+            // console.log('✅ Default admin already exists. Skipping creation.');
             return;
         }
 
@@ -29,11 +29,11 @@ const seedDefaultAdmin = async () => {
         });
 
         // NOTE: We only log the plain password for debugging/reference purposes.
-        console.log(`✨ Default admin created: ${defaultEmail} (Password: ${defaultPassword})`);
+        // console.log(`✨ Default admin created: ${defaultEmail} (Password: ${defaultPassword})`);
 
     } catch (error) {
         // If the hashing fails or database creation fails
-        console.error('❌ Error seeding default admin:', error.message);
+        // console.error('❌ Error seeding default admin:', error.message);
     }
 };
 

@@ -49,7 +49,7 @@ import User from "../models/User.js";
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email,password);
+    // console.log(email,password);
     
 
     if (!email || !password) {
@@ -117,7 +117,7 @@ const addUser = async (req, res) => {
     do{
       certificateNumber= generateCertificateNumber();
       checkUser=await User.findOne({certificateNumber});
-      console.log(`Attempted Cert: ${certificateNumber}, Found: ${!!checkUser}`);
+      // console.log(`Attempted Cert: ${certificateNumber}, Found: ${!!checkUser}`);
     }
     while(checkUser) // Loop continues if checkUser is NOT null (i.e., a duplicate was found)
 
@@ -193,13 +193,13 @@ const getAllUser = async (req, res) => {
       }
     )
     
-    console.log(allUser.length);
+    // console.log(allUser.length);
     return res.status(200).json({
       success: true,
       data: allUser,
     })
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     return res.status(404).json({
       success: false,
       message: `Can't Fetch all User Data`,
