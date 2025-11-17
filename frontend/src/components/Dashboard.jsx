@@ -1,12 +1,9 @@
 import  {React, useEffect, useState } from "react";
-// import { mockCertificates } from "../utils/certificateData";
 import AddCertificateForm from "./AddCertificateForm";
 import CertificateList from "./CertificateList";
 import { FileTextIcon, Plus, ShieldCheck } from "lucide-react";
 import Swal from "sweetalert2";
 import { apiConnector } from "../services/apiConnector";
-const ADD_API = "http://localhost:5001/api/v1/admin/adduser";
-const ALL_CERTIFICATES_API = "http://localhost:5001/api/v1/admin/getalluser";
 
 
 const Dashboard = () => {
@@ -15,14 +12,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function fetchCertificates() {
+      
       try {
-        const response = await apiConnector("GET", ALL_CERTIFICATES_API);
+        const response = await apiConnector("GET", import.meta.env.VITE_ALL_CERTIFICATES_API);
         
-        if (response.data && response.data.success) {
-          setCertificates(response.data.data);
+        if (response?.data && response.data?.success) {
+          setCertificates(response?.data?.data);
           
         } else {
-          console.error("Failed to fetch certificates", response.data.message);
+          console.error("Failed to fetch certificates", response?.data?.message);
         }
       } catch (error) {
         console.error("Error fetching certificates:", error);
@@ -55,7 +53,7 @@ const Dashboard = () => {
     //    });
 
     try {
-      const response = await apiConnector("POST", ADD_API,formData)
+      const response = await apiConnector("POST", import.meta.env.VITE_ADD_API,formData)
 
       console.log("User added RESPONSE............", response)
 
@@ -75,7 +73,6 @@ const Dashboard = () => {
          showConfirmButton: false,
          timer: 2000,
        });
-      // console.log("User added API ERROR............", error)
     }
     
   };

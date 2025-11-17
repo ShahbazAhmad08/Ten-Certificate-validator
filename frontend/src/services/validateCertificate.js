@@ -1,13 +1,11 @@
 
 export const validate = async (certificateNumber) => {
   try {
-   const API_URL=`http://localhost:5001/api/v1/user/getdetails/${certificateNumber}`
     async function fetchUser() {
   try {
-    const response = await fetch(API_URL);
-    // console.log("Validate API RESPONSE............", response)
+    const response = await fetch(`${import.meta.env.VITE_VALIDATE_URL}${certificateNumber}`);
 
-    // Parse the response data
+
     const data = await response.json();
 
     if (response.ok) {

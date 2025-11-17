@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Eye, Mail } from 'lucide-react'
 import { apiConnector } from '../services/apiConnector';
 
-const API_URL = 'http://localhost:5001/api/v1/admin/login';
+
 
 const LoginForm = ({onLogin}) => {
   const [formData, setFormData] = useState({
@@ -37,19 +37,14 @@ const LoginForm = ({onLogin}) => {
       return;
   }
   try {
-    const response = await apiConnector("POST",API_URL,{
+    const response = await apiConnector("POST", import.meta.env.VITE_LOGIN_API,{
       email,password
     })
-      // console.log("LOGIN API RESPONSE............", response)
-
+    
     if (!response.data.success) {
         throw new Error(response.data.message)
       }
-    // Parse the response data
-    // console.log(response);
-    // console.log(response.data);
     const data = await response.data;
-    // console.log(data?.token);
     
     if (data.success==true) {
         // Assuming your backend returns a token on success, e.g., { success: true, token: "...", email: "..." }
